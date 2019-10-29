@@ -1,5 +1,4 @@
 import React from "react";
-import { Button, Badge } from 'reactstrap';
 import Thumbnail from "../Thumbnail";
 import { Container, Row, Col } from "../Grid";
 
@@ -27,15 +26,15 @@ export function BookListItem(props) {
               <p>
                 {book.volumeInfo.description}
               </p>
-              <Badge target="_blank" href={book.volumeInfo.infoLink} color="info">View</Badge>{' '}
+              <a className="btn btn-success mr-3" target="_blank" href={book.volumeInfo.infoLink} role="button">View Book</a>
 
-              <Button color="info" onClick={() => props.handleSaveBook({
+              <button className="btn btn-success" onClick={() => props.handleSaveBook({
                 title: book.volumeInfo.title,
                 authors: book.volumeInfo.authors,
                 description: book.volumeInfo.description,
                 image: book.volumeInfo.imageLinks.thumbnail,
                 infoLink: book.volumeInfo.infoLink
-              })}>Save</Button>
+              })}>Save Book</button>
             </Col>
           </Row>
         </Container>

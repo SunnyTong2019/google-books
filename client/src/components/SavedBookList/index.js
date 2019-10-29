@@ -17,25 +17,19 @@ export function SavedBookListItem(props) {
         <Container>
           <Row>
             <Col size="xs-4 sm-2">
-              <Thumbnail src={book.volumeInfo.imageLinks.thumbnail} />
+              <Thumbnail src={book.image} />
             </Col>
             <Col size="xs-8 sm-9">
-              <h3>{book.volumeInfo.title}</h3>
+              <h3>{book.title}</h3>
               <p>
-                Author(s): {book.volumeInfo.authors}
+                Author(s): {book.authors}
               </p>
               <p>
-                {book.volumeInfo.description}
+                {book.description}
               </p>
-              <Badge target="_blank" href={book.volumeInfo.infoLink} color="info">View</Badge>{' '}
+              <a className="btn btn-success mr-3" target="_blank" href={book.infoLink} role="button">View Book</a>
 
-              <Button color="info" onClick={() => props.handleSaveBook({
-                title: book.volumeInfo.title,
-                authors: book.volumeInfo.authors,
-                description: book.volumeInfo.description,
-                image: book.volumeInfo.imageLinks.thumbnail,
-                infoLink: book.volumeInfo.infoLink
-              })}>Save</Button>
+              <button className="btn btn-success" onClick={() => props.handleDeleteBook(book._id)}>Delete Book</button>
             </Col>
           </Row>
         </Container>
