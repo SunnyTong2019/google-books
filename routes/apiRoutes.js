@@ -3,7 +3,7 @@ const router = require("express").Router();
 const booksController = require("../controllers/booksController");
 
 
-router.get("/books", (req, res) => {
+router.get("/search", (req, res) => {
   axios
     .get("https://www.googleapis.com/books/v1/volumes?q=" + req.query.q + "&key=AIzaSyB2DmDMvrzr6RVnFGr6a2qkYkO1r0Zdl0I")
     .then(results => res.json(results.data.items)
@@ -12,12 +12,12 @@ router.get("/books", (req, res) => {
 });
 
 
-router.route("/saved/books")
+router.route("/books")
   .get(booksController.findAll)
   .post(booksController.create);
 
 
-router.route("/saved/books/:id")
+router.route("/books/:id")
   .delete(booksController.remove);
 
 module.exports = router;

@@ -12,6 +12,10 @@ import {
   Route,
   Switch
 } from "react-router-dom";
+import io from 'socket.io-client';
+
+
+var socket = io();
 
 class App extends Component {
   state = {
@@ -20,11 +24,21 @@ class App extends Component {
     savedBooks: []
   };
 
-  componentDidMount() {  // get existing saved books when component mounted
-    API.getSavedBooks().then(res => {
-      this.setState({ savedBooks: res.data });
-    })
+  componentDidMount() {
+    API.getSavedBooks() // get existing saved books when page loads
+      .then(res => {
+        this.setState({ savedBooks: res.data });
+      })
       .catch(err => console.log(err));
+
+    socket.on('book-saved', data => {
+      API.getSavedBooks()
+        .then(res => {
+          this.setState({ savedBooks: res.data });
+          alert('A book has been saved: ' + data.book);
+        })
+        .catch(err => console.log(err));
+    });
   }
 
   handleInputChange = event => {
@@ -46,10 +60,14 @@ class App extends Component {
   handleSaveBook = (bookData) => {
     API.saveBook(bookData)
       .then(res => {
-        alert("Saved successfully!");
-        
+
         API.getSavedBooks().then(res => {  // when user saves a new book, get all the saved books and update the state
           this.setState({ savedBooks: res.data });
+
+          socket.emit('book-saved', bookData.title); // send a notification to server
+
+          alert("Saved successfully!");
+
         })
           .catch(err => console.log(err));
       })
@@ -77,7 +95,7 @@ class App extends Component {
           <Jumbotron />
 
           <Switch>
-
+            {/* route for search page */}
             <Route exact path="/">
               <Container>
                 <Row>
@@ -118,14 +136,14 @@ class App extends Component {
               </Container>
             </Route>
 
-
+            {/* route for saved page */}
             <Route path="/saved">
               <Container>
                 {this.state.savedBooks.length > 0 ?
                   <Row>
                     <Col size="xs-12">
                       <SavedBookList>
-                        <SavedBookListItem books={this.state.savedBooks} handleDeleteBook={this.handleDeleteBook}/>
+                        <SavedBookListItem books={this.state.savedBooks} handleDeleteBook={this.handleDeleteBook} />
                       </SavedBookList>
                     </Col>
                   </Row> :

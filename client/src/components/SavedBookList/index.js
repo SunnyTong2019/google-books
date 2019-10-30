@@ -1,5 +1,4 @@
 import React from "react";
-import { Button, Badge } from 'reactstrap';
 import Thumbnail from "../Thumbnail";
 import { Container, Row, Col } from "../Grid";
 
