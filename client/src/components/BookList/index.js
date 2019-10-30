@@ -21,7 +21,7 @@ export function BookListItem(props) {
             <Col size="xs-8 sm-9">
               <h3>{book.volumeInfo.title}</h3>
               <p>
-                Author(s): {book.volumeInfo.authors}
+                Author(s): {book.volumeInfo.authors.join(", ")}
               </p>
               <p>
                 {book.volumeInfo.description}

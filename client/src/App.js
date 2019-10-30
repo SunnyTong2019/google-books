@@ -52,7 +52,9 @@ class App extends Component {
     event.preventDefault();
     API.searchBooks(this.state.bookSearch)
       .then(res => {
-        this.setState({ books: res.data });
+        this.setState({ 
+          books: res.data
+        });
       })
       .catch(err => console.log(err));
   };

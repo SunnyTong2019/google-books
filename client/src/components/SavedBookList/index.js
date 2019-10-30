@@ -21,7 +21,7 @@ export function SavedBookListItem(props) {
             <Col size="xs-8 sm-9">
               <h3>{book.title}</h3>
               <p>
-                Author(s): {book.authors}
+                Author(s): {book.authors.join(", ")}
               </p>
               <p>
                 {book.description}
