@@ -1,5 +1,5 @@
-# Google Books Search
-Google Books Search is a React-based app. 
+# Google Books
+Google Books is a React-based book search app. 
 
 On Search page, the app will query books via the Google Books API and display books based on user searches. 
 
