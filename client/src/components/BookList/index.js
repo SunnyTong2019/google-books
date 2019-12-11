@@ -21,13 +21,11 @@ export function BookListItem(props) {
             <Col size="xs-8 sm-9">
               <h3>{book.volumeInfo.title}</h3>
               <p>
-                Author(s): 
+                Author(s):
               {
               book.volumeInfo.authors ? 
-              book.volumeInfo.authors.length > 0 ?
               " " + book.volumeInfo.authors.join(", "):
-              " " + book.volumeInfo.authors:
-              " None"
+              " Unknown"
               }
               </p>
               <p>
@@ -37,7 +35,7 @@ export function BookListItem(props) {
 
               <button className="btn btn-success" onClick={() => props.handleSaveBook({
                 title: book.volumeInfo.title,
-                authors: book.volumeInfo.authors,
+                authors: book.volumeInfo.authors || "Unknown",
                 description: book.volumeInfo.description,
                 image: book.volumeInfo.imageLinks.thumbnail,
                 infoLink: book.volumeInfo.infoLink
