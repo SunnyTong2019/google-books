@@ -12,7 +12,7 @@ export function BookList({ children }) {
 export function BookListItem(props) {
   return (
     props.books.map((book) =>
-      <li className="list-group-item">
+      <li className="list-group-item" key={book.id}>
         <Container>
           <Row>
             <Col size="xs-4 sm-2">
