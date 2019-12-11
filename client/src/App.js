@@ -16,15 +16,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import io from 'socket.io-client';
 
-toast.configure({
-  position: "top-center",
-  autoClose: 3000,
-  hideProgressBar: false,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true
-});
-
 var socket = io();
 
 class App extends Component {
@@ -109,6 +100,17 @@ class App extends Component {
           <Switch>
             {/* route for search page */}
             <Route exact path="/">
+              <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnVisibilityChange
+                draggable
+                pauseOnHover
+              />
               <Container>
                 <Row>
                   <Col size="md-12">
