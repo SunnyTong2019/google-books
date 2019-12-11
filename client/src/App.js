@@ -12,8 +12,18 @@ import {
   Route,
   Switch
 } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import io from 'socket.io-client';
 
+toast.configure({
+  position: "top-center",
+  autoClose: 3000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true
+});
 
 var socket = io();
 
@@ -52,7 +62,7 @@ class App extends Component {
     event.preventDefault();
     API.searchBooks(this.state.bookSearch)
       .then(res => {
-        this.setState({ 
+        this.setState({
           books: res.data
         });
       })
@@ -68,7 +78,7 @@ class App extends Component {
 
           socket.emit('book-saved', bookData.title); // send a notification to server
 
-          alert("Saved successfully!");
+          toast.success("Saved successfully!");
 
         })
           .catch(err => console.log(err));
