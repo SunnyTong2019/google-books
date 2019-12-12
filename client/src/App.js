@@ -69,7 +69,7 @@ class App extends Component {
 
           socket.emit('book-saved', bookData.title); // send a notification to server
 
-          toast.success("Saved successfully!");
+          toast.success("Book '" + bookData.title + "' is saved successfully!");
 
         })
           .catch(err => console.log(err));
