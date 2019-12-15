@@ -64,15 +64,20 @@ class App extends Component {
     API.saveBook(bookData)
       .then(res => {
 
-        API.getSavedBooks().then(res => {  // when user saves a new book, get all the saved books and update the state
-          this.setState({ savedBooks: res.data });
+        if (res.data === "Already Saved") {
+          toast.warning("Book '" + bookData.title + "' is already saved!");
+        } else {
 
-          socket.emit('book-saved', bookData.title); // send a notification to server
+          API.getSavedBooks().then(res => {  // when user saves a new book, get all the saved books and update the state
+            this.setState({ savedBooks: res.data });
 
-          toast.success("Book '" + bookData.title + "' is saved successfully!");
+            socket.emit('book-saved', bookData.title); // send a notification to server
 
-        })
-          .catch(err => console.log(err));
+            toast.success("Book '" + bookData.title + "' is saved successfully!");
+
+          }).catch(err => console.log(err));
+
+        }
       })
       .catch(err => console.log(err));
   };
